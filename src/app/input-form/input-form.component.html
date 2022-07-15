@@ -1,0 +1,32 @@
+<form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
+
+	<div class="form-group">
+
+		<div class="row">
+			<div class="col-md-5">
+				<input type="text" formControlName="pokemon_name" class="form-control"
+					[ngClass]="pFC.pokemon_name.errors ? 'is-invalid': 'is-valid' " placeholder="Pesquise o pokemon, suporte, treinador, item, energia ou estádio"
+					(ngModelChange)="onPokemonNameChange()">
+
+
+
+				<div *ngIf="pFC.pokemon_name.errors" class="invalid-feedback">
+					<div *ngIf="pFC.pokemon_name.errors.required">Coloque pelo menos um caractere.</div>
+					<div *ngIf="pFC.pokemon_name.errors.pattern">Apenas o caractere 'A-Z, a-z, 0-9, -' permitido. Sem espaços em branco.
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="col-md-1">
+				<button type="submit" [disabled]="pFC.pokemon_name.errors" style="margin-bottom: -20px;" class="btn btn-primary">Pesquise</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div *ngIf="responseErr.length !== 0">
+		<p class="text-danger">HTTP Error: {{responseErr}}</p>
+	</div>
+</form>

@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-4" *ngFor="let rC of receivedCards; let ndx = index" style="height: 100%;">
+        <a [routerLink]="['/pokemonDetail/',rC.id]" (click)="onReload(rC.id)" >
+        <div class="card text-white bg-dark mb-3 border-gold glow-shadow"
+            [ngClass]="{'glow-selected':(selectedCards.includes(ndx))}" (click)="tcgCardClicked(ndx)" (dblclick)="tcgCardDblClicked(ndx)">
+ 
+            <h3 class="card-header">{{rC.name}}</h3>
+            <div class="card-body">
+                <h5 class="card-title  d-flex justify-content-between align-items-center">
+                    Coleção<span>{{rC.set}}</span>
+                </h5>
+                <h6 class="card-subtitle text-muted d-flex justify-content-between align-items-center">
+                    Serie<span>{{rC.series}}</span>
+                </h6>
+                <p></p>
+                <h6 class="card-subtitle text-muted d-flex justify-content-between align-items-center">
+                    Tipo<span>{{rC.types}}</span>
+                </h6>
+            </div>
+   
+            <div class="card-body">
+                <div *ngIf="imgResloution === 'hiResolutionImages'; else tmplLowRes">
+                    <img [src]="rC.imageUrlHiRes" class="image-hi-res mx-auto d-block" [alt]="rC.imageUrlHiRes" />
+                </div>
+                <ng-template #tmplLowRes>
+                    <img [src]="rC.imageUrl" class="image-low-res mx-auto d-block" [alt]="rC.imageUrl" />
+                </ng-template>
+            </div>
+
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ID
+                    <span class="badge">{{rC.id}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    National Pokedex
+                    <span class="badge">{{rC.nationalPokedexNumber}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    HP
+                    <span class="badge">{{rC.hp}}</span>
+                </li>
+            </ul>
+        </div>
+        </a>
+    </div>
+</div>
+
